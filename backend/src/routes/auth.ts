@@ -59,7 +59,7 @@ router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
   res.status(200).send({ userId: req.userId });
 });
 
-router.post("/logout", (req: Request, res: Response) => {
+router.post("/logout", verifyToken, (req: Request, res: Response) => {
   res.cookie("auth_token", "", { expires: new Date(0) });
   res.send(); // to prevent Hanging Request (if you see at network section, it will appear as Pending due to no response being sent)
 });
